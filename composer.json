@@ -1,0 +1,20 @@
+{
+    "name": "vinehelper/vinehelper.ovh",
+    "type": "project",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "Vinehelper\\VinehelperOvh\\": "./"
+        }
+    },
+    "require": {
+        "sentry/sentry": "^3.22",
+        "symfony/http-client": "^5.4",
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

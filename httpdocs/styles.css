@@ -1,0 +1,55 @@
+body {
+  background-color: #121212;
+  font-family: Arial, sans-serif;
+}
+
+h1,h2 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 1.2rem;
+  color: #bfbfbf;
+}
+/* For the center div */
+#inner {
+  display: table;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#outer {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Changes the link color from default */
+a:link {
+  color: #50C878;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #3B7A57;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #39FF14;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.center{
+height: 100px;
+border-radius: 50%;
+border: 12px dotted rgb(57, 255, 20);
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
