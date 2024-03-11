@@ -99,9 +99,8 @@ switch($arrJSON['orderby']){
 }
 
 $stmt = $mysqli->prepare(
-	"SELECT p.asin, p.etv, p.`queue`, p.date_added, d.title, d.img_url"
+	"SELECT p.asin, p.etv, p.`queue`, p.date_added, p.title, p.img_url"
 	. " FROM product_etv as p"
-	. " LEFT JOIN product_detail as d ON (p.country = d.country AND p.asin = d.asin)"
 	. " WHERE p.country = ? $where ORDER BY $orderby LIMIT ?");
 $stmt->bind_param("si", $arrJSON['country'], $limit);
 $stmt->execute();

@@ -16,7 +16,21 @@ if(!isset($arrJSON['uuid']) || $arrJSON['uuid'] == null){
 $uuid = $arrJSON['uuid']; //>=V1.20
     
 
+$notif = [];
 
+if(isset($arrJSON["app_version"])){
+	$arr = explode(".", $arrJSON["app_version"]);
+	if(count($arr)==3){
+		$stmt = $mysqli->prepare("UPDATE user SET app_version_major=?, app_version_minor=?, app_version_patch=?, updated_at=NOW() WHERE uuid=? LIMIT 1;");
+		$stmt->bind_param("iiis", $arr[0], $arr[1], $arr[2], $uuid);
+    	$stmt->execute();
+	}
+	
+	if($arrJSON["app_version"] == "2.2.1"){
+		$notif = ["Your current version (2.2.1) has a significant bug in it, please update to 2.2.2 as soon as possible."];
+	}
+
+}
 
 
 
@@ -150,11 +164,11 @@ $entityBody = file_get_contents('php://input');
 if(!empty($entityBody)){
 	$arr = json_decode($entityBody, true);
 	$arrCount = count($arr);
-	$query = "INSERT IGNORE INTO product_detail (country, asin, title, img_url) VALUES (?,?,?,?)";
+	$query = "UPDATE product_etv SET title=?, img_url=? WHERE country=? AND asin=? AND title='' AND img_url='' LIMIT 1;";
 	$stmt = $mysqli->prepare($query);
 	foreach($arr as $item){
 		//{ asin: asin, title: title, thumbnail: thumbnail }
-		$stmt->bind_param("ssss", $arrJSON['country'], $item['asin'], $item['title'], $item['thumbnail']);
+		$stmt->bind_param("ssss", $item['title'], $item['thumbnail'], $arrJSON['country'], $item['asin']);
     	$stmt->execute();
 	}
 }
@@ -163,7 +177,7 @@ $time_elapsed_secs = microtime(true) - $start;
 $date = new \DateTime("now", new \DateTimeZone("UTC"));
 $currentTime = $date->format('Y-m-d H:i:s');
 if($arrJSON['api_version'] == 4){
-    $arrJSONResult = array("api_version" => 4, "crunch_time" => $time_elapsed_secs, "products" => $arrResults, "current_time"=>$currentTime, "added"=>$addedCounter, "notification"=>[]);
+    $arrJSONResult = array("api_version" => 4, "crunch_time" => $time_elapsed_secs, "products" => $arrResults, "current_time"=>$currentTime, "added"=>$addedCounter, "notification"=>$notif);
 }else{
     $arrJSONResult = array();
 }
