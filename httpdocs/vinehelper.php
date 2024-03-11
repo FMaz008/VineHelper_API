@@ -95,7 +95,10 @@ switch($arrJSON["action"]){
     case "getinfo":
         require("../vinehelper_getinfo.php");
         break;
-    case "date":
+     case "getinfoonly":
+        require("../vinehelper_getinfoonly.php");
+        break;
+	case "date":
         print json_encode(array('date'=>date("Y-m-d H:i:s")));
         die();
     default:
