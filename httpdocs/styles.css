@@ -48,8 +48,27 @@ a:hover {
 .center{
 height: 100px;
 border-radius: 50%;
-border: 12px dotted rgb(57, 255, 20);
+border: 0px dotted rgb(57, 255, 20);
 display: block;
 margin-left: auto;
 margin-right: auto;
+}
+
+
+.grid{
+	display:grid;
+	grid-template-columns: auto auto auto;
+}
+.grid-item{
+	margin:10px;
+	border-radius:5px;
+	background-color:#fff;
+	border:2px solid rgb(57, 255, 20);
+	color:#000;
+	padding:5px;
+	line-height:30px;
+}
+
+.grid a{
+	color:#000;
 }
