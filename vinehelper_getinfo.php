@@ -29,6 +29,10 @@ if(isset($arrJSON["app_version"])){
 	if($arrJSON["app_version"] == "2.2.1"){
 		$notif = ["Your current version (2.2.1) has a significant bug in it, please update to 2.2.2 as soon as possible."];
 	}
+	
+	if($arrJSON["app_version"] == "2.2.3" || $arrJSON["app_version"] == "2.2.4" || $arrJSON["app_version"] == "2.2.5"){
+		$notif = ["Your current version has a significant bug regarding hidden items not staying hidden, please <a href='https://github.com/FMaz008/VineHelper/wiki/Update-Vine-Helper-Manually'>update to 2.2.6</a> as soon as possible."];
+	}
 
 }
 
@@ -115,16 +119,19 @@ foreach ($arrJSON['arr_asin'] as $asin){
     
     
     if($date_added == null || $queue == null){
-        //The product does not exist, add it, so the date first seen will be created
-        $queue = null;
+		$queue = null;
         if(isset($arrJSON['queue']))
             $queue = $arrJSON['queue'];
         $stmt_i->bind_param("ssss", $arrJSON['country'], $asin, $queue, $queue);
         $stmt_i->execute();
-        
-        $addedCounter++;
-        
-        $arrResults[$asin]["date_added"] = date('Y-m-d h:i:s', time()); //Send temporary value
+		
+		//If the product did not exist, increase the counter and return now as a date
+        if($date_added == null){
+        	$addedCounter++;
+        	$arrResults[$asin]["date_added"] = date('Y-m-d h:i:s', time()); //Send temporary value
+		}else{
+			$arrResults[$asin]["date_added"] = $date_added;
+		}
     }else{
         $arrResults[$asin]["date_added"] = $date_added;
     }
