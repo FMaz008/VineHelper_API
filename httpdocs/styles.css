@@ -1,5 +1,5 @@
 body {
-  background-color: #121212;
+  background-color: hsla(0, 0%, 18%, 1);
   font-family: Arial, sans-serif;
 }
 
@@ -28,19 +28,19 @@ p {
 
 /* Changes the link color from default */
 a:link {
-  color: #50C878;
+  color: #167822;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: #3B7A57;
+  color: #003600;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: #39FF14;
+  color: #90ee90;
   background-color: transparent;
   text-decoration: underline;
 }
