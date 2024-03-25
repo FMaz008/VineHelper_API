@@ -27,14 +27,8 @@ p {
 }
 
 /* Changes the link color from default */
-a:link {
+a:link, a:visited {
   color: #167822;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #003600;
   background-color: transparent;
   text-decoration: none;
 }
